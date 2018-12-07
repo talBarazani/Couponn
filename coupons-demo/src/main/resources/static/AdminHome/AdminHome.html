@@ -1,0 +1,392 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css" crossorigin="anonymous">
+    <title>Admin Home</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+        <a class="navbar-brand" href="#">Couopnss</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item" id="navShowCustomers">
+                    <a class="nav-link" href="#">Show Customers</a>
+                </li>
+                <li class="nav-item" id="navShowCompanies">
+                    <a class="nav-link" href="#">Show Companies</a>
+                </li>
+                <li class="nav-item" id="createCustomerNav" data-toggle="modal" data-target="#createCustomerModal">
+                    <a class="nav-link" href="#">Create customer</a>
+                </li>
+                <li class="nav-item" id="createCompNav" data-toggle="modal" data-target="#createCompanyModal">
+                    <a class="nav-link" href="#">Create Company</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="col">
+    </div>
+    <div class="col-11">
+        <div id="mainPage">
+            <table id="myTable" class="table table-striped table-bordered" style="width:90%" role="grid">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Start Date</th>
+                    </tr>
+                </thead>
+                <tbody id="couponsTable">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+    <!-------------------                MODALSSSSSSSSSSSSSSSSS         ------------------------->
+    <div class="modal fade" id="createCompanyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create Company</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-row" id="formCompanyModal">
+                            <div class="col-4">
+                                <label for="companyName">Name</label>
+                                <input type="text" name="companyName" class="form-control is-invalid" id="companyName" placeholder="Name" value="" required>
+                                <div class="invalid-feedback">
+                                    Title should be between 2 to 30 characters.
+                                </div>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="text">Password</label>
+                                <input type="text" name="companyPassword" class="form-control is-invalid" id="companyPassword" placeholder="Password" value=""
+                                    required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <label for="couponPrice">Email</label>
+                                <input type="email" name="companyEmail" class="form-control is-invalid" id="companyEmail" placeholder="email" value="" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button id="createCompnayButt" class="btn btn-primary" type="submit">Create Company</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                            <div id="alertCreate">
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="createCustomerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create Customer</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-row" id="formCustomerModal">
+                            <div class="col-4">
+                                <label for="customerName">Name</label>
+                                <input type="text" name="customerName" class="form-control is-invalid" id="customerName" placeholder="Name" value="" required>
+                                <div class="invalid-feedback">
+                                    Title should be between 2 to 30 characters.
+                                </div>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="text">Password</label>
+                                <input type="text" name="customerPassword" class="form-control is-invalid" id="customerPassword" placeholder="Password" value=""
+                                    required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <label for="couponPrice">Email</label>
+                                <input type="email" name="customerEmail" class="form-control is-invalid" id="customerEmail" placeholder="email" value=""
+                                    required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button id="createCustomerButt" class="btn btn-primary" type="submit">Create Customer</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                            <div id="alertCreate">
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script>
+        const currCompany = {
+            id: 1
+        }
+        const baseUrl = "http://localhost:8080/rest/api";
+        var t = $('#myTable').DataTable();
+        $(document).ready(function () {
+            var t = $('#myTable').DataTable();
+
+            $('#myTable').on('click', 'tr', function () {
+                var id = t.row(this).data()[0];
+                $.ajax({
+                    url: baseUrl + `/coupon/${id}`,
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#modalDiv').empty();
+                        creatingModalForCoupon(data);
+                        $('#modalDiv').append(creatingModalForCoupon(data.result));
+                        $('#deleteCoupon').on('click', function (e) {
+                            $.ajax({
+                                type: "DELETE",
+                                url: baseUrl +
+                                    `/company/${currCompany.id}/coupon/${id}`
+
+                            })
+                        })
+                        $('#changeCoupon').on('click', function () {
+                            $('#imagemodal').modal('hide');
+                            $('#changeCouponModal').modal('show');
+                        })
+                        $('#saveChangesButt').on('click', function () {
+                            var date = $('#couponDateChange').val();
+                            var price = $('#couponPriceChange').val();
+                            $.ajax({
+                                type: "PUT",
+                                url: baseUrl +
+                                    `/company/${currCompany.id}/coupon/${data.result.id}/${date}/${price}`,
+                                contentType: 'application/json',
+                                dataType: 'json',
+                                success: function (msg) {
+                                    if (msg.result != null) {
+                                        $('#alertChange').append(
+                                            `<div class="col-12 alert alert-success " role="alert">
+                THE COUPON CHANGED SUCCESSFULY!                      .
+              </div>`
+                                        )
+                                    } else {
+                                        $('#alertChange').append(
+                                            `<div class="col-12 alert alert-warning " role="alert">
+                ${msg.error}                     .
+              </div>`
+                                        )
+                                    }
+
+                                }
+                            })
+
+                        })
+                        $('#imagemodal').modal('show');
+                    }
+                })
+            });
+        });
+        var t = $('#myTable').DataTable();
+        var coupons = [];
+        var counter = 0;
+
+        $('#customerPassword').on('change', function () {
+            var Amount = $('#customerPassword').val();
+            if ($('#customerPassword').val().length > 0) {
+                $('#customerPassword').attr('class', 'form-control is-valid');
+            } else {
+                $('#customerPassword').attr('class', 'form-control is-invalid');
+            }
+        })
+        $('#customerName').on('keyup', function () {
+            if (this.value.length > 4 && this.value.length < 101) {
+                $('#customerName').attr('class', 'form-control is-valid');
+            } else {
+                $('#customerName').attr('class', 'form-control is-invalid');
+            }
+        })
+        $('#customerEmail').on('keyup', function () {
+            if (this.value.length > 0 && this.value.length < 101 && this.value.includes('@')) {
+                $('#customerEmail').attr('class', 'form-control is-valid');
+            } else {
+                $('#customerEmail').attr('class', 'form-control is-invalid');
+            }
+        })
+        $('#companyPassword').on('change', function () {
+            var Amount = $('#companyPassword').val();
+            if ($('#companyPassword').val().length > 0) {
+                $('#companyPassword').attr('class', 'form-control is-valid');
+            } else {
+                $('#companyPassword').attr('class', 'form-control is-invalid');
+            }
+        })
+        $('#companyName').on('keyup', function () {
+            if (this.value.length > 4 && this.value.length < 101) {
+                $('#companyName').attr('class', 'form-control is-valid');
+            } else {
+                $('#companyName').attr('class', 'form-control is-invalid');
+            }
+        })
+        $('#companyEmail').on('keyup', function () {
+            if (this.value.length > 0 && this.value.length < 101 && this.value.includes('@')) {
+                $('#companyEmail').attr('class', 'form-control is-valid');
+            } else {
+                $('#companyEmail').attr('class', 'form-control is-invalid');
+            }
+        })
+        $('#createCompnayButt').on('click', function () {
+            createClient("company");
+        })
+        $('#createCustomerButt').on('click', function () {
+            createClient("customer");
+        })
+        function createClient(client){
+            var newCleint = {
+                name: $(`#${client}Name`).val(),
+                password: $(`#${client}Password`).val(),
+                email: $(`#${client}Email`).val(),
+            }
+            $.ajax({
+                type: "POST",
+                url: baseUrl + `/admin/${client}`,
+                data: JSON.stringify(newCleint),
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (data) {
+                    if (data.result != null) {
+                        $('#alertCreate').append(
+                            `<div class="col-12 alert alert-success " role="alert">
+                THE ${client} CREATED SUCCESSFULY!                      .
+              </div>`
+                        )
+                    } else {
+                        $('#alertCreate').append(
+                            `<div class="col-12 alert alert-warning " role="alert">
+                ${data.error}                     .
+              </div>`
+                        )
+                    }
+                    $('#alertCreate').empty();
+                }
+            })
+        }
+
+
+        function loadToTable(coupons) {
+            t.clear();
+            counter = 0;
+            var couponsArr = $.makeArray(coupons)
+            var couponsLength = couponsArr.length;
+            for (i = 0; i < couponsLength; i++) {
+                currCoupon = coupons[i];
+                t.row.add([
+                    currCoupon.id,
+                    currCoupon.title,
+                    currCoupon.price + "$",
+                    currCoupon.type,
+                    currCoupon.startDate
+                ]).draw(false);
+                counter++;
+            }
+        }
+
+
+        function loadTableWIthAjax(url) {
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                success: function (data) {
+                    loadToTable(data.result);
+                }
+            })
+        }
+
+        function creatingModalForCoupon(coupon) {
+            var modalDiv =
+                `</div>
+                                            <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                              <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                  <div class="modal-header">
+                                                    <p><h4 class="modal-title" id="myModalLabel">${coupon.title}</h4><p>
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                      </div>
+                                                      <div class="modal-body">
+                                                        <p><h6>Start-Date:</h6>${coupon.startDate}</p>
+                                                        <p><h6>End-Date:</h6>${coupon.endDate}</p>
+                                                        <p><h6>Amount:</h6>${coupon.amount}</p>
+                                                        <p><h6>Message:</h6>${coupon.message}</p>
+                                                        <p><h5>Price:</h5>${coupon.price}</p>
+                                                        <hr>
+                                                        <img class="card-img-top" src="${coupon.image}" id="imagepreview" style="width: 400px; height: 200px;" >
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                        <a href="#" class="btn" data-dismiss="modal">Close</a>
+                                                        <a href="#" class="btn btn-danger" data-dismiss="modal" id="deleteCoupon">DELETE!</a>
+                                                        <a href="#" class="btn btn-primary" id="changeCoupon">Change Coupon Data!</a>
+                                                      </div>
+                                                      <div id="alertSpoot">
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>`
+            return modalDiv;
+        }
+
+        function convertDate(date) {
+            var yyyy = date.getFullYear().toString();
+            var mm = (date.getMonth() + 1).toString();
+            var dd = date.getDate().toString();
+
+            var mmChars = mm.split('');
+            var ddChars = dd.split('');
+
+            return yyyy + '-' + (mmChars[1] ? mm : "0" + mmChars[0]) + '-' + (ddChars[1] ? dd : "0" +
+                ddChars[0]);
+        }
+    </script>

@@ -1,0 +1,522 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css" crossorigin="anonymous">
+  <title>Company Home</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <a class="navbar-brand" href="#">Couopnss</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item" id="navNew">
+          <a class="nav-link" href="#">Company's coupons</a>
+        </li>
+        <li class="nav-item" id="compDetails">
+          <a class="nav-link" href="#">Company Details</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Watch coupons by</a>
+          <div class="dropdown-menu">
+            <a id="navType" class="dropdown-item" data-toggle="modal" data-target="#typesModal" href="#">Type</a>
+            <a id="navMaxPrice" class="dropdown-item" data-toggle="modal" data-target="#priceModal" href="#">Max price</a>
+            <a id="navLatest" class="dropdown-item" data-toggle="modal" data-target="#dateModal" href="#">Latest end-date</a>
+          </div>
+        </li>
+        <li class="nav-item" id="createNav" data-toggle="modal" data-target="#createModal">
+          <a class="nav-link" href="#">Create Coupon</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="col">
+  </div>
+  <div class="col-11">
+    <div id="mainPage">
+      <table id="myTable" class="table table-striped table-bordered" style="width:90%" role="grid">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Price</th>
+            <th scope="col">Type</th>
+            <th scope="col">Start Date</th>
+          </tr>
+        </thead>
+        <tbody id="couponsTable">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+
+  <!-------------------                MODALSSSSSSSSSSSSSSSSS         ------------------------->
+
+
+
+
+  <div class="col" id="modalDiv">
+
+  </div>
+  <div class="modal fade" id="typesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Types</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          choose the coupons type you would like to see
+        </div>
+        <div class="modal-footer">
+          <button id="elcButt" type="button" class="btn btn-primary">Electoric</button>
+          <button id="fooButt" type="button" class="btn btn-secondary">Food</button>
+          <button id="leiButt" type="button" class="btn btn-success">Leisure</button>
+          <button id="vacButt" type="button" class="btn btn-danger">Vaction</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="priceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Max Price</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          filter the couposn by max price .
+        </div>
+        <div class="modal-footer">
+          <input type="number" id="numberInput">
+          <button id="sendNumberButt" type="button" class="btn btn-success">Send</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Chose Date</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          filter the couposn by end date .
+        </div>
+        <div class="modal-footer">
+          <input type="date" id="dateInput">
+          <button id="sendDateButt" type="button" class="btn btn-success">Send</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create Coupon</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-row" id="formModal">
+              <div class="col-4">
+                <label for="titleCoupon">Title</label>
+                <input type="text" name="titleCoupon" class="form-control is-invalid" id="titleCoupon" placeholder="Title" value="" required>
+                <div class="invalid-feedback">
+                  Title should be between 2 to 30 characters.
+                </div>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+              <div class="col">
+                <label>Type</label>
+                <select id="couopnType" name="couopnType">
+                  <option value="ELECTRICTY">Electronic</option>
+                  <option value="FOOD">Food</option>
+                  <option value="LEISURE">Leisure</option>
+                  <option value="VACATION">Vacation</option>
+                </select>
+              </div>
+              <div class="col-5">
+                <label for="date">End Date</label>
+                <input type="date" name="endDate" class="form-control is-invalid" id="endDate" placeholder="" value="" required>
+                <div class="invalid-feedback">
+                  End Date must me later than today.
+                </div>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="number">Amount</label>
+                <input type="number" name="couponAmount" class="form-control is-invalid" id="couponAmount" placeholder="" value="" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+              <div class="col-3">
+                <label for="couponPrice">Price</label>
+                <input type="number" name="couponPrice" class="form-control is-invalid" id="couponPrice" placeholder="Price" value="" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="desCoupon">Description</label>
+                <input type="text" name="desCoupon" class="form-control is-invalid" id="desCoupon" placeholder="Description" value="" required>
+                <div class="invalid-feedback">
+                  Description should be between 5 to 100 characters.
+                </div>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="urlCoupon">Image</label>
+                <input type="text" name="urlCoupon" class="form-control is-invalid" id="urlCoupon" placeholder="Image Url" value="" required>
+                <div class="invalid-feedback">
+                  Imange Url should be between 0 to 100 characters.
+                </div>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+              <div id="" class="col-12 alert alert-warning" role="alert">
+                the create cost is 100$ to the site .
+              </div>
+              <div class="col-12">
+                <button id="createCoupButt" class="btn btn-primary" type="submit">Create Couopn</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              </div>
+              <div id="alertCreate">
+
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="changeCouponModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Change coupon</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="col-12">
+            <label for="couponPrice">Name</label>
+            <input id="couponPriceChange" type="number" name="couponPrice">
+          </div>
+          <label for="couponDateChange">End-Date</label>
+          <input id="couponDateChange" type="date" name="couponDateChange">
+        </div>
+        <div class="modal-footer">
+          <div id="alertChange" class="row alert alert-warning" role="alert">
+            the change cost is 10$ to the site .
+          </div>
+          <div class="row">
+          <button id="saveChangesButt" type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+  <script>
+    const currCompany = {
+      id : sessionStorage.getItem('id')
+    }
+    const baseUrl = "http://localhost:8080/rest/api";
+    var t = $('#myTable').DataTable();
+    $(document).ready(function () {
+      var t = $('#myTable').DataTable();
+
+      $('#myTable').on('click', 'tr', function () {
+        var id = t.row(this).data()[0];
+        $.ajax({
+          url: baseUrl + `/coupon/${id}`,
+          dataType: 'json',
+          success: function (data) {
+            $('#modalDiv').empty();
+            creatingModalForCoupon(data);
+            $('#modalDiv').append(creatingModalForCoupon(data.result));
+            $('#deleteCoupon').on('click', function (e) {
+              $.ajax({
+                type : "DELETE",
+                url: baseUrl + `/company/${currCompany.id}/coupon/${id}`
+              })
+            })
+            $('#changeCoupon').on('click', function () {
+              $('#imagemodal').modal('hide');
+              $('#changeCouponModal').modal('show');
+            })
+            $('#saveChangesButt').on('click', function () {
+              saveChagne(data)
+            })
+            $('#imagemodal').modal('show');
+          }
+        })
+      });
+    });
+    var t = $('#myTable').DataTable();
+    var coupons = [];
+    var counter = 0;
+
+    $('#navNew').on('click', function () {
+      loadTableWIthAjax(baseUrl + `/company/${currCompany.id}/coupon`)
+    })
+    $('#elcButt').on('click', function () {
+      loadTableWIthAjax(baseUrl + `/company/${currCompany.id}/coupon/type/ele`)
+    })
+    $('#fooButt').on('click', function () {
+      loadTableWIthAjax(baseUrl + `/company/${currCompany.id}/coupon/type/foo`)
+    })
+    $('#leiButt').on('click', function () {
+      loadTableWIthAjax(baseUrl + `/company/${currCompany.id}/coupon/type/lei`)
+    })
+    $('#vacButt').on('click', function () {
+      loadTableWIthAjax(baseUrl + `/company/${currCompany.id}/coupon/type/vac`)
+    })
+    $('#sendNumberButt').on('click', function () {
+      var maxPrice = $('#numberInput').val();
+      loadTableWIthAjax(baseUrl + `/company/${currCompany.id}/coupon/underprice/${maxPrice}`)
+    })
+    $('#sendDateButt').on('click', function () {
+      var endDate = $('#dateInput').val();
+      loadTableWIthAjax(baseUrl + `/company/${currCompany.id}/coupon/enddate/${endDate}`)
+    })
+    $('#titleCoupon').on('keyup', function () {
+      if (this.value.length > 1 && this.value.length < 31) {
+        $('#titleCoupon').attr('class', 'form-control is-valid');
+      } else {
+        $('#titleCoupon').attr('class', 'form-control is-invalid');
+      }
+    })
+    $('#endDate').on('change', function () {
+      var date = new Date($('#endDate').val());
+      var currDate = new Date($.now());
+      if (date > currDate) {
+        $('#endDate').attr('class', 'form-control is-valid');
+      } else {
+        $('#endDate').attr('class', 'form-control is-invalid');
+      }
+    })
+    $('#couponPrice').on('change', function () {
+      var price = $('#couponPrice').val();
+      if (price > 0) {
+        $('#couponPrice').attr('class', 'form-control is-valid');
+      } else {
+        $('#couponPrice').attr('class', 'form-control is-invalid');
+      }
+    })
+    $('#couponAmount').on('change', function () {
+      var Amount = $('#couponAmount').val();
+      if (Amount > 0) {
+        $('#couponAmount').attr('class', 'form-control is-valid');
+      } else {
+        $('#couponAmount').attr('class', 'form-control is-invalid');
+      }
+    })
+    $('#desCoupon').on('keyup', function () {
+      if (this.value.length > 4 && this.value.length < 101) {
+        $('#desCoupon').attr('class', 'form-control is-valid');
+      } else {
+        $('#desCoupon').attr('class', 'form-control is-invalid');
+      }
+    })
+    $('#urlCoupon').on('keyup', function () {
+      if (this.value.length > 0 && this.value.length < 101) {
+        $('#urlCoupon').attr('class', 'form-control is-valid');
+      } else {
+        $('#urlCoupon').attr('class', 'form-control is-invalid');
+      }
+    })
+    $('#createCoupButt').on('click', function () {
+      var newCoupon = {
+        title: $('#titleCoupon').val(),
+        endDate: $('#endDate').val(),
+        price: parseInt($('#couponPrice').val()),
+        message: $('#desCoupon').val(),
+        image: $('#urlCoupon').val(),
+        amount: parseInt($('#couponAmount').val()),
+        startDate: convertDate(new Date($.now())),
+        type: $('#couopnType').val()
+      }
+      $.ajax({
+        type: "POST",
+        url: baseUrl + `/company/${currCompany.id}/coupon`,
+        data: JSON.stringify(newCoupon),
+        contentType: 'application/json',
+        dataType: 'json',
+        success: function (data) {
+          if (data.result != null) {
+            $('#alertCreate').append(
+              `<div class="col-12 alert alert-success " role="alert">
+                THE COUPON CREATED SUCCESSFULY!                      .
+              </div>`
+            )
+          } else {
+            $('#alertCreate').append(
+              `<div class="col-12 alert alert-warning " role="alert">
+                ${data.error}                     .
+              </div>`
+            )
+          }
+          $('#alertCreate').empty();
+        }
+      })
+    })
+    $('#createNav').on('click', function () {
+      $('#alertCreate').remove();
+    })
+
+
+
+
+
+
+    function loadToTable(coupons) {
+      t.clear();
+      counter = 0;
+      var couponsArr = $.makeArray(coupons)
+      var couponsLength = couponsArr.length;
+      for (i = 0; i < couponsLength; i++) {
+        currCoupon = coupons[i];
+        t.row.add([
+          currCoupon.id,
+          currCoupon.title,
+          currCoupon.price + "$",
+          currCoupon.type,
+          currCoupon.startDate
+        ]).draw(false);
+        counter++;
+      }
+    }
+
+    function loadTableWIthAjax(url) {
+      $.ajax({
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+          loadToTable(data.result);
+        }
+      })
+
+    }
+    function saveChagne(data){
+      var date = $('#couponDateChange').val();
+              var price = $('#couponPriceChange').val();
+              $.ajax({
+                type: "PUT",
+                url: baseUrl +
+                  `/company/${currCompany.id}/coupon/${data.result.id}/${date}/${price}`,
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (msg) {
+                  if (msg.result != null) {
+                    $('#alertChange').append(
+                      `<div class="col-12 alert alert-success " role="alert">
+                THE COUPON CHANGED SUCCESSFULY!                      .
+              </div>`
+                    )
+                  } else {
+                    $('#alertChange').append(
+                      `<div class="col-12 alert alert-warning " role="alert">
+                ${msg.error}                     .
+              </div>`
+                    )
+                  }
+
+                }
+              })
+
+    }
+
+    function creatingModalForCoupon(coupon) {
+      var modalDiv =
+        `</div>
+                                            <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                              <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                  <div class="modal-header">
+                                                    <p><h4 class="modal-title" id="myModalLabel">${coupon.title}</h4><p>
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                      </div>
+                                                      <div class="modal-body">
+                                                        <p><h6>Start-Date:</h6>${coupon.startDate}</p>
+                                                        <p><h6>End-Date:</h6>${coupon.endDate}</p>
+                                                        <p><h6>Amount:</h6>${coupon.amount}</p>
+                                                        <p><h6>Message:</h6>${coupon.message}</p>
+                                                        <p><h5>Price:</h5>${coupon.price}</p>
+                                                        <hr>
+                                                        <img class="card-img-top" src="${coupon.image}" id="imagepreview" style="width: 400px; height: 200px;" >
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                        <a href="#" class="btn" data-dismiss="modal">Close</a>
+                                                        <a href="#" class="btn btn-danger" data-dismiss="modal" id="deleteCoupon">DELETE!</a>
+                                                        <a href="#" class="btn btn-primary" id="changeCoupon">Change Coupon Data!</a>
+                                                      </div>
+                                                      <div id="alertSpoot">
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>`
+      return modalDiv;
+    }
+
+    function convertDate(date) {
+      var yyyy = date.getFullYear().toString();
+      var mm = (date.getMonth() + 1).toString();
+      var dd = date.getDate().toString();
+
+      var mmChars = mm.split('');
+      var ddChars = dd.split('');
+
+      return yyyy + '-' + (mmChars[1] ? mm : "0" + mmChars[0]) + '-' + (ddChars[1] ? dd : "0" + ddChars[0]);
+    }
+  </script>

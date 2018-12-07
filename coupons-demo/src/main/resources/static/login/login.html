@@ -1,0 +1,72 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <title>Login Couponss</title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <form>
+                <div class="form-group">
+                    <label for="clientEmail">Email address</label>
+                    <input type="text" class="form-control" id="clientEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                    <label for="clientPassword">Password</label>
+                    <input type="text" class="form-control" id="clientPassword" placeholder="Password">
+                </div>
+                <div>
+                    <form action="">
+                        <input type="radio" name="clientType" value="customer" > Customer
+                        <br>
+                        <input type="radio" name="clientType" value="company"> Company
+                        <br>
+                        <input type="radio" name="clientType" value="admin"> Admin
+                    </form>
+                </div>
+                <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-4"></div>
+
+
+
+
+   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script>
+        var client;
+        const baseUrl = "http://localhost:8080/rest/api";
+        $('#submit').on('click', function () {
+                    var email = $('#clientEmail').val();
+                    var password = $('#clientPassword').val();
+                    var client = $("input[name='clientType']:checked").val();
+                    $.ajax({
+                                type: "POST",
+                                url: baseUrl + `/${client}/login/${email}/${password}`,
+                                success: function (clientBack) {
+                                    var id = clientBack.result.id;
+                                    sessionStorage.setItem('id', id)
+                                    window.location.replace(`http://localhost:8080/${client}home/${client}home.html`)
+                                }
+
+                                })
+                            })
+    </script>
+</body>
+
+
+
+
+
+</html>
