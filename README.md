@@ -16,8 +16,8 @@ For building and running the application you need:
 -[Eclipse/Spring Tool Suit]
 
 ## connect the database to project 
-your database shuold be at localhost:3306
-you need to create schema calls-"coupons-app", the application will connect to that scheme and the jpa.dll will auto genrate the DB tabels when you will first play the application
+your database should be at localhost:3306
+you need to create schema calls-"coupons-app", the application will connect to that scheme and the jpa.dll will auto generate the DB tables when you will first play the application
     
 ## Running the application locally
 
@@ -25,7 +25,12 @@ There are several ways to run a Spring Boot application on your local machine. O
 
 Alternatively you can use the [Spring Boot Maven plugin](https://docs.spring.io/spring-boot/docs/current/reference/html/build-tool-plugins-maven-plugin.html) like so:
 
+* There are 2 jars that should run simultaneously, each in its own port: coupon (port 8080) and income (port 8888) 
 ```shell
 mvn spring-boot:run
 ```
 
+## Client side
+I implement 3 pages one for each customer: admin, company and regular costumer.
+Client side implement with HTML 5, jQuery, java script, bootstrap 4 
+missing functionality (only on client side): delete customers, view customer details , view income company/admin
